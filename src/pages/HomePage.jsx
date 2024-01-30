@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BASE_URL, getMoviesToday } from '../Service/ServiceApi';
 
 export const HomePage = () => {
@@ -14,21 +15,23 @@ export const HomePage = () => {
             });
     }, []);
 
-    console.log('movies', movies);
+    // console.log('movies', movies);
     return (
         <div>
             {movies && (
                 <>
                     <h1>Афиша</h1>
-                    <ul>
+                    <ul className="movieList">
                         {movies.map(film => (
-                            <li>
-                                <h3>{film.name}</h3>
+                            <li key={film.id} className="movieItem">
                                 <img
                                     src={`${BASE_URL}${film.img}`}
-                                    width={240}
                                     alt={film.name}
                                 />
+                                <h3>{film.name}</h3>
+                                <Link to={`/film/${film.id}`}>
+                                    <button>Подробнее</button>
+                                </Link>
                             </li>
                         ))}
                     </ul>
