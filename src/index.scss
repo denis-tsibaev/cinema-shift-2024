@@ -15,6 +15,8 @@ code {
 ul,
 ol {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 a {
@@ -27,34 +29,115 @@ img {
     height: auto;
 }
 
+.nav {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    color: #9534d2;
+    border-bottom: 1px solid gray;
+
+    .nav__link:not(:last-child) {
+        font-size: 18px;
+        padding-left: 24px;
+    }
+
+    .nav-link-out {
+        font-size: 18px;
+        margin-left: auto;
+    }
+}
+
+.footer {
+    border-top: 1px solid gray;
+    margin-top: 20px;
+
+    .footer-text {
+        color: gray;
+        margin: 0;
+        padding: 15px 0;
+    }
+}
+
+.afisha-button {
+    outline: none;
+    border: none;
+    width: 200px;
+    height: 40px;
+    color: #fff;
+    border-radius: 32px;
+    background-color: rgb(3, 106, 113);
+    padding: 16px, 32px, 16px, 32px;
+
+    &:hover {
+        background-color: rgb(0, 128, 128);
+    }
+}
+
 .movieList {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     padding: -8px;
+}
+
+.afisha-movie-name {
+    margin-top: 0;
 }
 
 .movieItem {
     padding: 8px;
     width: 300px;
-    min-height: 500px;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
 
     img {
-        margin-bottom: 16px;
+        margin-bottom: 8px;
+        box-shadow:
+            0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+            0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+            0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+        transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
+    &:hover {
+        transform: scale(1.01);
+        cursor: zoom-in;
+    }
+
     h3 {
         margin: 0;
         margin-bottom: 16px;
     }
 }
 
+.afisha-title {
+    text-align-last: left;
+    margin-left: 32px;
+    font-size: 36px;
+}
+
 .moviePage {
     img {
-        display: inline-block;
+        width: 500px;
     }
 
     p {
         width: 500px;
+        text-align: left;
     }
+
+    .moviePage__title {
+        font-size: 32px;
+        margin-top: 16px;
+    }
+}
+
+.dateList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.dateItem {
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
