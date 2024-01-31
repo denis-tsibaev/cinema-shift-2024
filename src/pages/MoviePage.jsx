@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { BASE_URL, getMovie } from '../Service/ServiceApi';
+import { Button } from '../components/Button';
 
 export const MoviePage = () => {
     const [movie, setMovie] = useState({});
@@ -19,14 +20,14 @@ export const MoviePage = () => {
 
     return (
         <div className="moviePage">
-            <h1>{movie.name}</h1>
-            <img src={`${BASE_URL}${movie.img}`} width={240} alt={movie.name} />
+            <img src={`${BASE_URL}${movie.img}`} alt={movie.name} />
+            <h2 className="moviePage__title">{movie.name}</h2>
             <p>{movie.description}</p>
             <p>
                 Кинопоиск: <b>{movie.userRatings?.kinopoisk}</b>
             </p>
             <Link to={`/film/${filmId}/schedule`}>
-                <button>Посмотреть расписание</button>
+                <Button text="Посмотреть расписание" />
             </Link>
         </div>
     );

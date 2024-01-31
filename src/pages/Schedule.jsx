@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getSchedule } from '../Service/ServiceApi';
 import { useParams } from 'react-router-dom';
+import { getSchedule } from '../Service/ServiceApi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Schedule = () => {
     const { filmId } = useParams();
@@ -13,16 +15,32 @@ export const Schedule = () => {
         });
     }, [filmId]);
 
+    const onDateClick = () => {
+        console.log('onDateClick');
+        toast.error('Go beyond!', { autoClose: 500, theme: 'colored' });
+    };
+
     return (
         <div>
             <h1>Расписание</h1>
-            <ul>
-                {schedules.map(({ date }) => (
-                    <li key={date}>
-                        <p>{date}</p>
+            <ul className="dateList">
+                {schedules.map(({ date, seances }) => (
+                    <li key={date} className="dateItem">
+                        <button onClick={onDateClick}>{date} </button>
+                        <ul>
+                            {seances.map(({ time, hall }) => (
+                                <li key={time}>
+                                    {time}
+                                    {' - '}
+                                    {hall.name}
+                                </li>
+                            ))}
+                        </ul>
                     </li>
                 ))}
             </ul>
+
+            <ToastContainer />
         </div>
     );
 };
