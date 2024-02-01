@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSchedule } from '../Service/ServiceApi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getSchedule } from '../service/serviceApi';
 
 export const Schedule = () => {
     const { filmId } = useParams();
