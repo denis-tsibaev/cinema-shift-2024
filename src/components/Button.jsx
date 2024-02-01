@@ -1,5 +1,20 @@
 import React from 'react';
 
-export const Button = ({ title, children }) => {
-    return <button className="afisha-button">{title}</button>;
+export const Button = ({
+    type = 'button',
+    style,
+    className = 'afisha-button',
+    children,
+    onClick,
+}) => {
+    return (
+        <button
+            type={type}
+            style={style}
+            className={className}
+            onClick={onClick}
+        >
+            {children}
+        </button>
+    );
 };

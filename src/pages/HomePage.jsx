@@ -35,7 +35,7 @@ export const HomePage = () => {
                                     {film.name}
                                 </h3>
                                 <Link to={`/film/${film.id}`}>
-                                    <Button title="Подробнее" color="red" />
+                                    <Button>Подробнее</Button>
                                 </Link>
                             </li>
                         ))}

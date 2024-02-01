@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Button } from '../components/Button';
+import { ScheduleByDay } from '../components/ScheduleByDay';
 import { getSchedule } from '../service/serviceApi';
 
 export const Schedule = () => {
@@ -10,35 +12,32 @@ export const Schedule = () => {
 
     useEffect(() => {
         getSchedule(filmId).then(({ data }) => {
-            setSchedules(data.schedules);
-            console.dir(data.schedules);
+            setSchedules(data?.schedules);
+            // console.dir(data.schedules);
         });
     }, [filmId]);
 
-    const onDateClick = () => {
-        console.log('onDateClick');
-        toast.error('Go beyond!', { autoClose: 500, theme: 'colored' });
-    };
+    const [index, setIndex] = useState(0);
 
     return (
         <div>
             <h1>Расписание</h1>
-            <ul className="dateList">
-                {schedules.map(({ date, seances }) => (
-                    <li key={date} className="dateItem">
-                        <button onClick={onDateClick}>{date} </button>
-                        <ul>
-                            {seances.map(({ time, hall }) => (
-                                <li key={time}>
-                                    {time}
-                                    {' - '}
-                                    {hall.name}
-                                </li>
-                            ))}
-                        </ul>
-                    </li>
-                ))}
-            </ul>
+
+            {schedules.map(({ date }, index) => (
+                <>
+                    <Button
+                        className="schedule-button"
+                        onClick={() => setIndex(index)}
+                        key={index}
+                    >
+                        {date}
+                    </Button>
+                </>
+            ))}
+            <h2>Выбрана дата: {schedules[index]?.date}</h2>
+            <h3>Выберите время и зал</h3>
+
+            <ScheduleByDay schedules={schedules} index={index} />
 
             <ToastContainer />
         </div>

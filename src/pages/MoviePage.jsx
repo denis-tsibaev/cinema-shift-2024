@@ -27,7 +27,7 @@ export const MoviePage = () => {
                 Кинопоиск: <b>{movie.userRatings?.kinopoisk}</b>
             </p>
             <Link to={`/film/${filmId}/schedule`}>
-                <Button title="Посмотреть расписание" />
+                <Button>Посмотреть расписание</Button>
             </Link>
         </div>
     );
