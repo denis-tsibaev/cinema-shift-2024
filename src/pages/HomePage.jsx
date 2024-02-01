@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BASE_URL, getMoviesToday } from '../Service/ServiceApi';
+import { ToastContainer, toast } from 'react-toastify';
 import { Button } from '../components/Button';
+import { BASE_URL, getMoviesToday } from '../service/serviceApi';
 
 export const HomePage = () => {
     const [movies, setMovies] = useState([]);
@@ -13,6 +14,7 @@ export const HomePage = () => {
             })
             .catch(error => {
                 console.log(error.message);
+                toast.error('Что-то пошло не так! Попробуйте позже.');
             });
     }, []);
 
@@ -33,13 +35,14 @@ export const HomePage = () => {
                                     {film.name}
                                 </h3>
                                 <Link to={`/film/${film.id}`}>
-                                    <Button text="Подробнее" />
+                                    <Button>Подробнее</Button>
                                 </Link>
                             </li>
                         ))}
                     </ul>
                 </>
             )}
+            <ToastContainer />
         </div>
     );
 };

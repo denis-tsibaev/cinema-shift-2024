@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BASE_URL, getMovie } from '../Service/ServiceApi';
 import { Button } from '../components/Button';
+import { BASE_URL, getMovie } from '../service/serviceApi';
 
 export const MoviePage = () => {
     const [movie, setMovie] = useState({});
@@ -27,7 +27,7 @@ export const MoviePage = () => {
                 Кинопоиск: <b>{movie.userRatings?.kinopoisk}</b>
             </p>
             <Link to={`/film/${filmId}/schedule`}>
-                <Button text="Посмотреть расписание" />
+                <Button>Посмотреть расписание</Button>
             </Link>
         </div>
     );
