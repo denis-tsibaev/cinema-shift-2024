@@ -1,17 +1,16 @@
-import React from 'react';
+import { useParams } from 'react-router-dom';
 
 export const Seats = () => {
+    const { hallName } = useParams();
+    console.log(hallName);
+
     return (
         <div>
             <h1>Выбор места</h1>
-            <select name="" id=""></select>
-            <select name="" id=""></select>
-            <select name="" id=""></select>
-            <select name="" id=""></select>
-            <select name="" id=""></select>
-            <select name="" id=""></select>
-            <select name="" id=""></select>
-            <select name="" id=""></select>
+            <label>
+                qwe
+                <input type="checkbox" name="" id="" />
+            </label>
         </div>
     );
 };

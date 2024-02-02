@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
 
@@ -7,7 +6,7 @@ export const ScheduleByDay = ({ schedules, index }) => {
         <ul className="dateList">
             {schedules[index]?.seances?.map(({ time, hall }, i) => (
                 <li key={i} className="dateItem">
-                    <Link to="seats">
+                    <Link to={`seats/${hall.name}`}>
                         <Button style={{ backgroundColor: hall.name }}>
                             {time}-
                             {hall.name === 'Red'
