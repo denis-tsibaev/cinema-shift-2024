@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.f5b08bf0.css",
-    "main.js": "/static/js/main.9aefea78.js",
-    "static/media/tickets.jpg": "/static/media/tickets.fab3ee11df914365a458.jpg",
-    "static/media/cinema-logo.svg": "/static/media/cinema-logo.c5d9b0433f05fbf0339490805bbd46bf.svg",
-    "index.html": "/index.html",
-    "main.f5b08bf0.css.map": "/static/css/main.f5b08bf0.css.map",
-    "main.9aefea78.js.map": "/static/js/main.9aefea78.js.map"
+    "main.css": "/cinema-shift-2024/static/css/main.239c446c.css",
+    "main.js": "/cinema-shift-2024/static/js/main.60207b87.js",
+    "static/media/tickets.jpg": "/cinema-shift-2024/static/media/tickets.fab3ee11df914365a458.jpg",
+    "static/media/cinema-logo.svg": "/cinema-shift-2024/static/media/cinema-logo.c5d9b0433f05fbf0339490805bbd46bf.svg",
+    "index.html": "/cinema-shift-2024/index.html",
+    "main.239c446c.css.map": "/cinema-shift-2024/static/css/main.239c446c.css.map",
+    "main.60207b87.js.map": "/cinema-shift-2024/static/js/main.60207b87.js.map"
   },
   "entrypoints": [
-    "static/css/main.f5b08bf0.css",
-    "static/js/main.9aefea78.js"
+    "static/css/main.239c446c.css",
+    "static/js/main.60207b87.js"
   ]
 }
