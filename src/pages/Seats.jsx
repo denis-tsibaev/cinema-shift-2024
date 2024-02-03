@@ -7,7 +7,7 @@ import { Modal } from '../components/Modal';
 export const Seats = () => {
     const [showModal, setShowModal] = useState(false);
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const toggleModal = () => {
         setShowModal(!showModal);
