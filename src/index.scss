@@ -149,12 +149,12 @@ img {
     }
 }
 
-.dateList {
-    // display: flex;
-    // flex-wrap: wrap;
-    // justify-content: center;
-    // align-items: baseline;
-}
+// .dateList {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: center;
+//     align-items: baseline;
+// }
 
 .dateItem {
     margin-right: 8px;
@@ -168,9 +168,15 @@ img {
     //     url('./images/tickets.jpg')
     // );
 
-    background-image: url('./images/tickets.jpg');
+    background-image: url('./assets/images/tickets.jpg');
     background-size: cover;
     background-position: center;
     height: 1000px;
     opacity: 0.2;
+}
+
+.input-checkbox-seat {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
 }

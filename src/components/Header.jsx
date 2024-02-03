@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ReactLogo from '../images/cinema-logo.svg';
+import ReactLogo from '../assets/images/cinema-logo.svg';
 
 export const Header = () => {
     return (
