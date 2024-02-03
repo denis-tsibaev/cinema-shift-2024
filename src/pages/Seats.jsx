@@ -1,66 +1,57 @@
 // import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../components/Button';
+import { Modal } from '../components/Modal';
 
 export const Seats = () => {
-    // const { hallName } = useParams();
-    // console.log(hallName);
+    const [showModal, setShowModal] = useState(false);
 
-    // switch (hallName) {
-    //     case hallName === 'Red':
-    //         return <div>Red</div>;
-    //     case hallName === 'Green':
-    //         return <div>Green</div>;
-    //     case hallName === 'Blue':
-    //         return <div>Blue</div>;
+    const navigate = useNavigate();
 
-    //     default:
-    //         return <div>Default</div>;
-    // }
-
-    // const x = [1, 2, 3, 4, 5, 6];
+    const toggleModal = () => {
+        setShowModal(!showModal);
+    };
 
     const red = {
         row: [1, 2, 3, 4, 5, 6],
         seat: 6,
     };
 
-    // for (let i = 0; i <= red.row; i++) {
-    //     for (let j = 0; j <= red.seat; j++) {
-    //         console.log(i, j);
-    //     }
-    // }
-
-    // const seatsMarkUp = arr => {
-    //     for (let index = 0; index < arr.length; index++) {
-    //         console.log(arr[index]);
-
-    //         return (
-    //             <label>
-    //                 {arr[index]}
-    //                 <input
-    //                     type="checkbox"
-    //                     name=""
-    //                     id=""
-    //                     className="input-checkbox-seat"
-    //                 />
-    //             </label>
-    //         );
-    //     }
-    // };
-
     return (
-        <div>
-            <h1>Выбор места</h1>
-            {red.row.map(el => (
-                <label key={el}>
-                    {el}
-                    <input
-                        type="checkbox"
-                        name=""
-                        id=""
-                        className="input-checkbox-seat"
-                    />
-                </label>
-            ))}
-        </div>
+        <>
+            <div className="seats-container">
+                <h1>Выбор места</h1>
+                {red.row.map(el => (
+                    <label key={el}>
+                        {el}
+                        <input
+                            type="checkbox"
+                            name=""
+                            id=""
+                            className="input-checkbox-seat"
+                        />
+                    </label>
+                ))}
+            </div>
+            <Button onClick={toggleModal}>Подтвердить</Button>
+            {showModal && (
+                <Modal>
+                    <h2>Вы купили билеты!</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Qui id doloremque nihil aliquam, nam eius illo,
+                        cumque est iusto alias sapiente error rerum tempore quo
+                        tempora sit! Cupiditate voluptate laborum unde odit
+                        repudiandae eaque quis, accusamus blanditiis dicta,
+                        autem nostrum illo totam aut mollitia fuga voluptatibus
+                        sit culpa. Provident, temporibus?
+                    </p>
+                    <button type="button" onClick={toggleModal}>
+                        Закрыть
+                    </button>
+                </Modal>
+            )}
+        </>
     );
 };
