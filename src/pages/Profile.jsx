@@ -1,59 +1,70 @@
 import React, { useState } from 'react';
-import { regNewUser } from '../service/serviceApi';
+import { sendPhoneNumberToGetCode, userSignin } from '../service/serviceApi';
 
 export const Profile = () => {
-    const [newUserName, setNewUserName] = useState('');
-    const [newUserEmail, setNewUserEmail] = useState('');
-    const [newUserPhone, setNewUserPhone] = useState('');
+    const [userPhoneNumber, setUserPhoneNumber] = useState('');
+    const [regPressed, setRegPressed] = useState(false);
+    const [otp, setOtp] = useState(null);
 
-    const newUser = {
-        name: newUserName,
-        email: newUserEmail,
-        phone: newUserPhone,
-        // code: 345231,
+    const userPhoneAndOtp = {
+        phone: userPhoneNumber,
+        code: otp,
     };
 
-    const onNameChange = e => {
-        setNewUserName(e.target.value);
-    };
-    const onEmailChange = e => {
-        setNewUserEmail(e.target.value);
-    };
-    const onPhoneChange = e => {
-        setNewUserPhone(e.target.value);
+    const phoneSubmit = () => {
+        sendPhoneNumberToGetCode(userPhoneNumber);
     };
 
     const handleSubmit = e => {
         e.preventDefault();
-        regNewUser(newUser);
-        console.log(newUser);
         e.currentTarget.reset();
     };
 
     return (
         <div>
             <h1>Личный кабинет</h1>
-            <h3>Зарегистрироваться</h3>
-            <form onSubmit={handleSubmit} className="form" autoComplete="off">
-                <label>
-                    Телефон
-                    <input
-                        type="phone"
-                        name="phone"
-                        required
-                        onChange={onPhoneChange}
-                    />
-                </label>
 
-                <label>
-                    Имя
-                    <input type="text" name="name" onChange={onNameChange} />
-                </label>
-                <label>
-                    Email
-                    <input type="email" name="email" onChange={onEmailChange} />
-                </label>
-                <button type="submit">Зарегистрироваться</button>
+            <form className="form" onSubmit={handleSubmit}>
+                {regPressed ? (
+                    <label>
+                        Введите OTP код
+                        <input
+                            type="text"
+                            onChange={e => setOtp(e.target.value)}
+                        />
+                    </label>
+                ) : (
+                    <label>
+                        Телефон
+                        <input
+                            type="phone"
+                            name="phone"
+                            required
+                            onChange={e => setUserPhoneNumber(e.target.value)}
+                        />
+                    </label>
+                )}
+
+                {!regPressed ? (
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setRegPressed(true);
+                            phoneSubmit();
+                        }}
+                    >
+                        <b>Зарегистрироваться</b>
+                    </button>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={() => {
+                            userSignin(userPhoneAndOtp);
+                        }}
+                    >
+                        Войти
+                    </button>
+                )}
             </form>
         </div>
     );

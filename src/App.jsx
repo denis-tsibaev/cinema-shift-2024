@@ -22,7 +22,7 @@ function App() {
                     path="film/:filmId/schedule/seats/:hallName"
                     element={<Seats />}
                 />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/*" element={<Profile />} />
                 <Route path="/tickets" element={<Tickets />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
