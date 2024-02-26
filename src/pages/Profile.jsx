@@ -2,17 +2,36 @@ import React, { useState } from 'react';
 import { sendPhoneNumberToGetCode, userSignin } from '../service/serviceApi';
 
 export const Profile = () => {
-    const [userPhoneNumber, setUserPhoneNumber] = useState('');
-    const [regPressed, setRegPressed] = useState(false);
+    const [phone, setPhone] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [otp, setOtp] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [regPressed, setRegPressed] = useState(false);
 
-    const userPhoneAndOtp = {
-        phone: userPhoneNumber,
+    const userInfo = {
+        phone: phone,
+        name: name,
+        email: email,
         code: otp,
+        token: token,
+    };
+
+    const handleChange = ({ target: { name, value } }) => {
+        switch (name) {
+            case 'phone':
+                return setPhone(value);
+            case 'name':
+                return setName(value);
+            case 'email':
+                return setEmail(value);
+            default:
+                return;
+        }
     };
 
     const phoneSubmit = () => {
-        sendPhoneNumberToGetCode(userPhoneNumber);
+        sendPhoneNumberToGetCode(phone);
     };
 
     const handleSubmit = e => {
@@ -23,6 +42,7 @@ export const Profile = () => {
     return (
         <div>
             <h1>Личный кабинет</h1>
+            <h2>Регистрация</h2>
 
             <form className="form" onSubmit={handleSubmit}>
                 {regPressed ? (
@@ -40,31 +60,45 @@ export const Profile = () => {
                             type="phone"
                             name="phone"
                             required
-                            onChange={e => setUserPhoneNumber(e.target.value)}
+                            onChange={handleChange}
                         />
                     </label>
                 )}
 
                 {!regPressed ? (
                     <button
-                        type="button"
+                        type="submit"
                         onClick={() => {
                             setRegPressed(true);
                             phoneSubmit();
                         }}
                     >
-                        <b>Зарегистрироваться</b>
+                        <b>Получить отп код</b>
                     </button>
                 ) : (
                     <button
-                        type="button"
-                        onClick={() => {
-                            userSignin(userPhoneAndOtp);
+                        disabled={token}
+                        type="submit"
+                        onClick={async () => {
+                            userSignin(userInfo);
+                            const apiToken = await userSignin(userInfo);
+                            setToken(apiToken);
+                            localStorage.setItem('token', apiToken);
+                            // console.log(apiToken);
+                            // console.log(await userSignin(userInfo));
                         }}
                     >
-                        Войти
+                        OK
                     </button>
                 )}
+                {token ? (
+                    <>
+                        <p>Авторизация прошла успешно!</p>
+                        <p>{phone}</p>
+                        <p>{name}</p>
+                        <p>{email}</p>
+                    </>
+                ) : null}
             </form>
         </div>
     );

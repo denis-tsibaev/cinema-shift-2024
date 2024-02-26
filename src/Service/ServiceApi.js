@@ -10,13 +10,22 @@ export const getMovie = filmId => axios.get(`/cinema/film/${filmId}`);
 export const getSchedule = filmId =>
     axios.get(`/cinema/film/${filmId}/schedule`);
 
-export const sendPhoneNumberToGetCode = userPhoneNumber => {
-    const { data } = axios.post('/auth/otp', { phone: userPhoneNumber });
-    return data;
+export const sendPhoneNumberToGetCode = async userPhoneNumber => {
+    try {
+        const { data } = await axios.post('/auth/otp', {
+            phone: userPhoneNumber,
+        });
+        return data;
+    } catch (error) {
+        console.error(error.message);
+    }
 };
 
-export const userSignin = credentials => {
-    const { data } = axios.post('/users/signin', credentials);
-    console.log('credentials', credentials);
-    return data;
+export const userSignin = async credentials => {
+    try {
+        const { data } = await axios.post('/users/signin', credentials);
+        return data.token;
+    } catch (error) {
+        console.error(error.message);
+    }
 };
