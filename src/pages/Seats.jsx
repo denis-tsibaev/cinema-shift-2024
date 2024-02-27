@@ -1,6 +1,6 @@
 // import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 
@@ -37,19 +37,17 @@ export const Seats = () => {
             <Button onClick={toggleModal}>Подтвердить</Button>
             {showModal && (
                 <Modal>
-                    <h2>Вы купили билеты!</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Qui id doloremque nihil aliquam, nam eius illo,
-                        cumque est iusto alias sapiente error rerum tempore quo
-                        tempora sit! Cupiditate voluptate laborum unde odit
-                        repudiandae eaque quis, accusamus blanditiis dicta,
-                        autem nostrum illo totam aut mollitia fuga voluptatibus
-                        sit culpa. Provident, temporibus?
-                    </p>
-                    <button type="button" onClick={toggleModal}>
-                        Закрыть
-                    </button>
+                    <h2>Вы выбрали места</h2>
+                    <p>Перейти к оплате билетов на выбранный сеанс?</p>
+                    <br />
+                    <br />
+                    <br />
+                    <Button>
+                        <Link to="/profile" style={{ color: 'white' }}>
+                            Перейти
+                        </Link>
+                    </Button>
+                    <Button onClick={toggleModal}>Отмена</Button>
                 </Modal>
             )}
         </>
