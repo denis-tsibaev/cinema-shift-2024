@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { sendPhoneNumberToGetCode, userSignin } from '../service/serviceApi';
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { Button } from '../components/Button';
+import {
+    sendPhoneNumberToGetCode,
+    userSignin,
+    userUpdate,
+} from '../service/serviceApi';
 
 export const Profile = () => {
     const [phone, setPhone] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState(null);
-    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [token, setToken] = useState(null);
     const [regPressed, setRegPressed] = useState(false);
+    const [disabled, setDisabled] = useState(false);
 
     const userInfo = {
         phone: phone,
@@ -30,76 +38,125 @@ export const Profile = () => {
         }
     };
 
-    const phoneSubmit = () => {
-        sendPhoneNumberToGetCode(phone);
-    };
-
     const handleSubmit = e => {
         e.preventDefault();
         e.currentTarget.reset();
     };
 
     return (
-        <div>
-            <h1>Личный кабинет</h1>
-            <h2>Регистрация</h2>
+        <>
+            <div>
+                <h1>Личный кабинет</h1>
 
-            <form className="form" onSubmit={handleSubmit}>
-                {regPressed ? (
-                    <label>
-                        Введите OTP код
-                        <input
-                            type="text"
-                            onChange={e => setOtp(e.target.value)}
-                        />
-                    </label>
-                ) : (
-                    <label>
-                        Телефон
-                        <input
-                            type="phone"
-                            name="phone"
-                            required
-                            onChange={handleChange}
-                        />
-                    </label>
-                )}
+                <form className="form" onSubmit={handleSubmit}>
+                    {regPressed ? (
+                        <label>
+                            Введите OTP код
+                            <input
+                                type="text"
+                                onChange={e => setOtp(e.target.value)}
+                            />
+                        </label>
+                    ) : (
+                        <label>
+                            <p>
+                                {' '}
+                                Введите ваш номер, мы отправим код подтверждения
+                            </p>
+                            Телефон
+                            <input
+                                type="phone"
+                                name="phone"
+                                required
+                                onChange={handleChange}
+                            />
+                        </label>
+                    )}
+                    {!regPressed ? (
+                        <button
+                            type="submit"
+                            onClick={() => {
+                                setRegPressed(true);
+                                sendPhoneNumberToGetCode(phone);
+                            }}
+                        >
+                            <p>Получить отп код</p>
+                        </button>
+                    ) : (
+                        <button
+                            disabled={token}
+                            type="submit"
+                            onClick={async () => {
+                                const token = await userSignin(userInfo);
+                                setToken(token);
+                                // localStorage.setItem('token', token);
+                            }}
+                        >
+                            OK
+                        </button>
+                    )}
+                    {token ? (
+                        <p>
+                            Авторизация по номеру телефона {phone} прошла
+                            успешно!
+                        </p>
+                    ) : null}
+                    {token ? (
+                        <label>
+                            Добавить имя
+                            <input
+                                type="text"
+                                name="name"
+                                onChange={handleChange}
+                            />
+                        </label>
+                    ) : null}
+                    {token ? (
+                        <label>
+                            Добавить почту
+                            <input
+                                type="email"
+                                name="email"
+                                onChange={handleChange}
+                            />
+                        </label>
+                    ) : null}
 
-                {!regPressed ? (
-                    <button
-                        type="submit"
-                        onClick={() => {
-                            setRegPressed(true);
-                            phoneSubmit();
-                        }}
-                    >
-                        <b>Получить отп код</b>
-                    </button>
-                ) : (
-                    <button
-                        disabled={token}
-                        type="submit"
-                        onClick={async () => {
-                            userSignin(userInfo);
-                            const apiToken = await userSignin(userInfo);
-                            setToken(apiToken);
-                            localStorage.setItem('token', apiToken);
-                            // console.log(apiToken);
-                            // console.log(await userSignin(userInfo));
-                        }}
-                    >
-                        OK
-                    </button>
-                )}
-                {token ? (
-                    <>
-                        <p>Авторизация прошла успешно!</p>
-                        <p>{phone}</p>
-                        <p>{name}</p>
-                        <p>{email}</p>
-                    </>
-                ) : null}
-            </form>
-        </div>
+                    {phone && token ? <p>телефон: {phone}</p> : null}
+                    {name ? <p>имя: {name}</p> : null}
+                    {email ? <p>почта: {email}</p> : null}
+                    {token && !disabled ? (
+                        <Button
+                            onClick={async () => {
+                                const data = await userUpdate({
+                                    profile: {
+                                        firstname: name,
+                                        email: email,
+                                    },
+                                    phone,
+                                });
+                                console.log(data.success);
+                                setDisabled(data.success);
+                                toast('Данные обновлены');
+                            }}
+                            disabled={disabled}
+                        >
+                            Сохранить
+                        </Button>
+                    ) : null}
+
+                    {token && disabled ? (
+                        <>
+                            <Button>
+                                <Link style={{ color: '#fff' }} to="/tickets">
+                                    Билеты
+                                </Link>
+                            </Button>
+                        </>
+                    ) : null}
+                </form>
+            </div>
+            <ToastContainer />
+        </>
     );
 };
