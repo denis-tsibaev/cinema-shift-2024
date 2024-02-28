@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { Button } from '../components/Button';
-import { BASE_URL, getMoviesToday } from '../service/serviceApi';
+import { BASE_URL, getMoviesToday } from '../service/ServiceApi';
 
 export const HomePage = () => {
     const [movies, setMovies] = useState([]);
