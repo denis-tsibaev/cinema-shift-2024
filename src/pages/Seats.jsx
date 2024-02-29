@@ -7,13 +7,9 @@ import { Modal } from '../components/Modal';
 export const Seats = ({ hallName, places, time }) => {
   const [showModal, setShowModal] = useState(false);
 
-  // const navigate = useNavigate();
-
   const toggleModal = () => {
     setShowModal(!showModal);
   };
-
-  console.log('places', places);
 
   return (
     <>
@@ -27,17 +23,25 @@ export const Seats = ({ hallName, places, time }) => {
               : 'Синий зал'}
           , сеанс на: {time}
         </h2>
-        {/* {places.map(el => (
-          <label key={el}>
-            {el}
-            <input
-              type="checkbox"
-              name=""
-              id=""
-              className="input-checkbox-seat"
-            />
-          </label>
-        ))} */}
+        <ol>
+          {places.forEach(seats =>
+            seats.map(row => {
+              console.log(row);
+              console.log(row.price);
+              return <li>{row.price}</li>;
+
+              // <label>
+              //   {seat.price}
+              //   <input
+              //     type="checkbox"
+              //     name=""
+              //     id=""
+              //     className="input-checkbox-seat"
+              //   />
+              // </label>;
+            }),
+          )}
+        </ol>
       </div>
       <Button onClick={toggleModal}>Подтвердить</Button>
       {showModal && (
