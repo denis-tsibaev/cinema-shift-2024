@@ -24,22 +24,18 @@ export const Seats = ({ hallName, places, time }) => {
           , сеанс на: {time}
         </h2>
         <ol>
-          {places.forEach(seats =>
-            seats.map(row => {
-              console.log(row);
-              console.log(row.price);
-              return <li>{row.price}</li>;
-
-              // <label>
-              //   {seat.price}
-              //   <input
-              //     type="checkbox"
-              //     name=""
-              //     id=""
-              //     className="input-checkbox-seat"
-              //   />
-              // </label>;
-            }),
+          {places.map((row, i) =>
+            row.map((seat, j) => (
+              <>
+                <li>
+                  {i + 1} ряд
+                  <label>
+                    {/* {seat.price} */}
+                    <input type="checkbox" className="input-checkbox-seat" />
+                  </label>
+                </li>
+              </>
+            )),
           )}
         </ol>
       </div>
@@ -51,11 +47,9 @@ export const Seats = ({ hallName, places, time }) => {
           <br />
           <br />
           <br />
-          <Button>
-            <Link to="/profile" style={{ color: 'white' }}>
-              Перейти
-            </Link>
-          </Button>
+          <Link to="/profile" style={{ color: 'white' }}>
+            <Button>Перейти</Button>
+          </Link>
           <Button onClick={toggleModal}>Отмена</Button>
         </Modal>
       )}
