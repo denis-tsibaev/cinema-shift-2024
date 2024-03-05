@@ -118,7 +118,7 @@ img {
     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   &:hover,
-  &focus {
+  &:focus {
     transform: scale(1.01);
   }
 
@@ -162,37 +162,150 @@ img {
   margin-bottom: 8px;
 }
 
-.tickets {
-  // background-image: linear-gradient(
-  //     rgba(47, 48, 58, 0.4),
-  //     rgba(47, 48, 58, 0.4),
-  //     url('./assets/images/tickets.jpg')
-  // );
+// .tickets {
+//   background-image: linear-gradient(
+//       rgba(47, 48, 58, 0.4),
+//       rgba(47, 48, 58, 0.4),
+//       url('./assets/images/tickets.jpg')
+//   );
 
-  // background-image: url('./assets/images/tickets.jpg');
-  // background-size: cover;
-  // background-position: center;
-  // height: 1000px;
-  // opacity: 0.5;
-}
-
-.input-checkbox-seat {
-  width: 20px;
-  height: 20px;
-  margin: 10px;
-}
+//   background-image: url('./assets/images/tickets.jpg');
+//   background-size: cover;
+//   background-position: center;
+//   height: 1000px;
+//   opacity: 0.5;
+// }
 
 .seats-container {
   min-height: 400px;
   position: relative;
 
-  ol {
+  .Red {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 500px;
+    width: 360px;
+    margin-bottom: 20px;
 
-    li {
+    .checkbox-item {
+      position: relative;
+    }
+
+    .checkbox-item-price {
+      position: absolute;
+      top: 0;
+      left: 16px;
+      font-size: 14px;
+    }
+
+    .input-checkbox-seat {
+      width: 36px;
+      height: 36px;
+      margin: 10px;
+
+      &:checked {
+        background-color: rgb(3, 106, 113);
+      }
+    }
+
+    .checkbox-item-row {
+      font-size: 14px;
+      position: absolute;
+      top: -20px;
+      left: 7px;
+    }
+    .checkbox-item-seat {
+      font-size: 14px;
+      position: absolute;
+      top: -20px;
+      right: 7px;
+    }
+
+    .label-checkbox {
+      font-size: 14px;
+    }
+  }
+
+  .Green {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 600px;
+    margin-bottom: 30px;
+
+    .checkbox-item {
+      position: relative;
+    }
+
+    .checkbox-item-price {
+      position: absolute;
+      top: 5px;
+      left: 17px;
+      font-size: 14px;
+    }
+
+    .input-checkbox-seat {
+      width: 36px;
+      height: 36px;
+      margin: 10px;
+    }
+
+    .checkbox-item-row {
+      font-size: 14px;
+      position: absolute;
+      top: -20px;
+      left: 7px;
+    }
+    .checkbox-item-seat {
+      font-size: 14px;
+      position: absolute;
+      top: -20px;
+      right: 2px;
+    }
+
+    .label-checkbox {
+      font-size: 14px;
+    }
+  }
+
+  .Blue {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 900px;
+    margin-bottom: 30px;
+
+    .checkbox-item {
+      position: relative;
+    }
+
+    .checkbox-item-price {
+      position: absolute;
+      top: 0;
+      left: 14px;
+      font-size: 14px;
+    }
+
+    .input-checkbox-seat {
+      width: 30px;
+      height: 30px;
+      margin: 10px;
+    }
+
+    .checkbox-item-row {
+      font-size: 12px;
+      position: absolute;
+      top: -20px;
+      left: 7px;
+    }
+    .checkbox-item-seat {
+      font-size: 12px;
+      position: absolute;
+      top: -20px;
+      right: 2px;
+    }
+
+    .label-checkbox {
       font-size: 14px;
     }
   }
