@@ -6,7 +6,7 @@ import {
     sendPhoneNumberToGetCode,
     userSignin,
     userUpdate,
-} from '../service/serviceApi';
+} from '../service/ServiceApi';
 
 export const Profile = () => {
     const [phone, setPhone] = useState('');

@@ -11,24 +11,20 @@ import { NotFound } from './pages/NotFound.jsx';
 import { Footer } from './components/Footer.jsx';
 
 function App() {
-    return (
-        <Container>
-            <Header />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/film/:filmId" element={<MoviePage />} />
-                <Route path="/film/:filmId/schedule" element={<Schedule />} />
-                <Route
-                    path="film/:filmId/schedule/seats/:hallName"
-                    element={<Seats />}
-                />
-                <Route path="/profile/*" element={<Profile />} />
-                <Route path="/tickets" element={<Tickets />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Footer />
-        </Container>
-    );
+  return (
+    <Container>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/film/:filmId" element={<MoviePage />} />
+        <Route path="/film/:filmId/schedule" element={<Schedule />} />
+        <Route path="/profile/*" element={<Profile />} />
+        <Route path="/tickets" element={<Tickets />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </Container>
+  );
 }
 
 export default App;
