@@ -4,7 +4,6 @@ import { Header } from './components/Header.jsx';
 import { HomePage } from './pages/HomePage.jsx';
 import { MoviePage } from './pages/MoviePage.jsx';
 import { Schedule } from './pages/Schedule.jsx';
-import { Seats } from './pages/Seats.jsx';
 import { Profile } from './pages/Profile.jsx';
 import { Tickets } from './pages/Tickets.jsx';
 import { NotFound } from './pages/NotFound.jsx';

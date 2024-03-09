@@ -32,8 +32,7 @@ export const Seats = ({ hallName, places, time }) => {
               : 'Синий зал'}
           , сеанс на: {time}
         </h2>
-        <p>Экран</p>
-        <hr />
+        <p className="screen">Экран</p>
         <br />
         <br />
         <ol className={hallName}>
@@ -79,7 +78,7 @@ export const Seats = ({ hallName, places, time }) => {
           <br />
           <br />
           <Link to="/profile" style={{ color: 'white' }}>
-            <Button>Перейти</Button>
+            <Button style={{ marginRight: '5px' }}>Перейти</Button>
           </Link>
           <Button onClick={toggleModal}>Отмена</Button>
         </Modal>
