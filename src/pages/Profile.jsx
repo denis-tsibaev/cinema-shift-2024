@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { Button } from '../components/Button';
-import {
-  sendPhoneNumberToGetCode,
-  userSignin,
-  userUpdate,
-  getUserSession,
-} from '../service/ServiceApi';
+import { Modal } from '../components/Modal';
+import { sendPhoneNumberToGetCode, userSignin } from '../service/ServiceApi';
 
-export const Profile = () => {
-  const [phone, setPhone] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState(null);
-  const [token, setToken] = useState(null);
+export const Profile = ({
+  phone,
+  setPhone,
+  name,
+  setName,
+  card,
+  setCard,
+  expDate,
+  setExpDate,
+  cvv,
+  setCvv,
+  email,
+  setEmail,
+  otp,
+  setOtp,
+  token,
+  setToken,
+  userInfo,
+}) => {
   const [regPressed, setRegPressed] = useState(false);
-  const [disabled, setDisabled] = useState(false);
-
-  const userInfo = {
-    phone: phone,
-    name: name,
-    email: email,
-    code: otp,
-    token: token,
-  };
+  //   const [disabled, setDisabled] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -34,6 +36,12 @@ export const Profile = () => {
         return setName(value);
       case 'email':
         return setEmail(value);
+      case 'card':
+        return setCard(value);
+      case 'expDate':
+        return setExpDate(value);
+      case 'cvv':
+        return setCvv(value);
       default:
         return;
     }
@@ -44,12 +52,11 @@ export const Profile = () => {
     e.currentTarget.reset();
   };
 
-  //   useEffect(() => {
-  //     getUserSession().then(data => {
-  //       setPhone(data?.user?.phone);
-  //       setName(data?.user?.name);
-  //     });
-  //   }, []);
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -60,7 +67,11 @@ export const Profile = () => {
           {regPressed ? (
             <label>
               Введите OTP код
-              <input type="text" onChange={e => setOtp(e.target.value)} />
+              <input
+                type="text"
+                onChange={e => setOtp(e.target.value)}
+                disabled={token}
+              />
             </label>
           ) : (
             <label>
@@ -101,20 +112,8 @@ export const Profile = () => {
           {token ? (
             <p>Авторизация по номеру телефона {phone} прошла успешно!</p>
           ) : null}
-          {token ? (
-            <label>
-              Добавить имя
-              <input type="text" name="name" onChange={handleChange} />
-            </label>
-          ) : null}
-          {token ? (
-            <label>
-              Добавить почту
-              <input type="email" name="email" onChange={handleChange} />
-            </label>
-          ) : null}
 
-          {phone && token ? <p>телефон: {phone}</p> : null}
+          {/* {phone && token ? <p>телефон: {phone}</p> : null}
           {name ? <p>имя: {name}</p> : null}
           {email ? <p>почта: {email}</p> : null}
           {token && !disabled ? (
@@ -135,19 +134,45 @@ export const Profile = () => {
             >
               Сохранить
             </Button>
-          ) : null}
+          ) : null} */}
 
-          {token && disabled ? (
+          {token && (
             <>
-              <Button>
-                <Link style={{ color: '#fff' }} to="/tickets">
-                  Билеты
-                </Link>
+              <Button style={{ width: '200px' }} onClick={toggleModal}>
+                Оплатить билеты
               </Button>
             </>
-          ) : null}
+          )}
         </form>
       </div>
+      {showModal && (
+        <Modal>
+          <form className="form" onSubmit={handleSubmit}>
+            <label>
+              Номер телефона*
+              <input type="number" name="phone" onChange={handleChange} />
+            </label>
+            <label>
+              Укажите имя
+              <input type="text" name="name" onChange={handleChange} />
+            </label>
+            <label>
+              Номер карты*
+              <input type="number" name="card" onChange={handleChange} />
+            </label>
+            <label>
+              Срок*
+              <input type="text" name="expDate" onChange={handleChange} />
+            </label>
+            <label>
+              CVV*
+              <input type="text" name="cvv" onChange={handleChange} />
+            </label>
+          </form>
+          <Button onClick={() => navigate('/tickets')}>Ок</Button>
+          <Button onClick={toggleModal}>Отмена</Button>
+        </Modal>
+      )}
       <ToastContainer />
     </>
   );

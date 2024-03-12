@@ -3,7 +3,7 @@ import { Button } from '../components/Button';
 import { Seats } from './Seats';
 
 export const ScheduleByDay = ({ schedules, index }) => {
-  const [hallName, setHallName] = useState('red');
+  const [hallName, setHallName] = useState('Red');
   const [places, setPlaces] = useState([]);
   const [time, setTime] = useState(null);
 
@@ -21,8 +21,8 @@ export const ScheduleByDay = ({ schedules, index }) => {
                 style={{ backgroundColor: hall.name }}
                 onClick={() => {
                   // console.log(schedules[index].seances[i].hall.places);
-                  setHallName(schedules[index].seances[i].hall.name);
-                  setPlaces(schedules[index].seances[i].hall.places);
+                  setHallName(schedules[index]?.seances[i].hall.name);
+                  setPlaces(schedules[index]?.seances[i].hall.places);
                   setTime(time);
                 }}
               >
