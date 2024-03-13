@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/cinema-shift-2024/static/css/main.1b62ccec.css",
-    "main.js": "/cinema-shift-2024/static/js/main.757b28c5.js",
+    "main.css": "/cinema-shift-2024/static/css/main.ff0a796d.css",
+    "main.js": "/cinema-shift-2024/static/js/main.710eb304.js",
     "static/media/cinema-logo.svg": "/cinema-shift-2024/static/media/cinema-logo.1f535dd46ab51946f4477424431d4e33.svg",
     "index.html": "/cinema-shift-2024/index.html",
-    "main.1b62ccec.css.map": "/cinema-shift-2024/static/css/main.1b62ccec.css.map",
-    "main.757b28c5.js.map": "/cinema-shift-2024/static/js/main.757b28c5.js.map"
+    "main.ff0a796d.css.map": "/cinema-shift-2024/static/css/main.ff0a796d.css.map",
+    "main.710eb304.js.map": "/cinema-shift-2024/static/js/main.710eb304.js.map"
   },
   "entrypoints": [
-    "static/css/main.1b62ccec.css",
-    "static/js/main.757b28c5.js"
+    "static/css/main.ff0a796d.css",
+    "static/js/main.710eb304.js"
   ]
 }
