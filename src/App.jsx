@@ -19,6 +19,11 @@ function App() {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState(null);
   const [token, setToken] = useState(null);
+  const [hallName, setHallName] = useState('Red');
+  const [places, setPlaces] = useState([]);
+  const [time, setTime] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [tickets, setTickets] = useState([]);
 
   const userInfo = {
     phone: phone,
@@ -34,7 +39,23 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/film/:filmId" element={<MoviePage />} />
-        <Route path="/film/:filmId/schedule" element={<Schedule />} />
+        <Route
+          path="/film/:filmId/schedule"
+          element={
+            <Schedule
+              hallName={hallName}
+              setHallName={setHallName}
+              places={places}
+              setPlaces={setPlaces}
+              time={time}
+              setTime={setTime}
+              tickets={tickets}
+              setTickets={setTickets}
+              totalPrice={totalPrice}
+              setTotalPrice={setTotalPrice}
+            />
+          }
+        />
         <Route
           path="/profile/*"
           element={
@@ -56,6 +77,8 @@ function App() {
               token={token}
               setToken={setToken}
               userInfo={userInfo}
+              tickets={tickets}
+              totalPrice={totalPrice}
             />
           }
         />

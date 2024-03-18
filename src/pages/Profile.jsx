@@ -23,10 +23,14 @@ export const Profile = ({
   token,
   setToken,
   userInfo,
+  tickets,
+  totalPrice,
 }) => {
   const [regPressed, setRegPressed] = useState(false);
   //   const [disabled, setDisabled] = useState(false);
   const [showModal, setShowModal] = useState(true);
+
+  console.log(tickets, totalPrice);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {

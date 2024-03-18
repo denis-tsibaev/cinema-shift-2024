@@ -1,14 +1,22 @@
-import { useState } from 'react';
 import { Button } from '../components/Button';
 import { Seats } from './Seats';
 
-export const ScheduleByDay = ({ schedules, index }) => {
-  const [hallName, setHallName] = useState('Red');
-  const [places, setPlaces] = useState([]);
-  const [time, setTime] = useState(null);
-
-  //   console.log('hallName', hallName);
-  //   console.log('places', places);
+export const ScheduleByDay = ({
+  schedules,
+  index,
+  hallName,
+  setHallName,
+  places,
+  setPlaces,
+  time,
+  setTime,
+  tickets,
+  setTickets,
+  totalPrice,
+  setTotalPrice,
+}) => {
+  console.log('hallName', hallName);
+  console.log('places', places);
 
   return (
     <>
@@ -20,9 +28,9 @@ export const ScheduleByDay = ({ schedules, index }) => {
                 className="hall-name-button"
                 style={{ backgroundColor: hall.name }}
                 onClick={() => {
-                  // console.log(schedules[index].seances[i].hall.places);
-                  setHallName(schedules[index]?.seances[i].hall.name);
-                  setPlaces(schedules[index]?.seances[i].hall.places);
+                  console.log(schedules[index].seances[i].hall.places);
+                  setHallName(schedules[index].seances[i]?.hall.name);
+                  setPlaces(schedules[index].seances[i]?.hall.places);
                   setTime(time);
                 }}
               >
@@ -59,7 +67,15 @@ export const ScheduleByDay = ({ schedules, index }) => {
           </p>
         </div>
       </div>
-      <Seats hallName={hallName} places={places} time={time} />
+      <Seats
+        hallName={hallName}
+        places={places}
+        time={time}
+        tickets={tickets}
+        setTickets={setTickets}
+        totalPrice={totalPrice}
+        setTotalPrice={setTotalPrice}
+      />
     </>
   );
 };

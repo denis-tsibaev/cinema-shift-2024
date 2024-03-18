@@ -4,13 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 
-export const Seats = ({ hallName, places, time }) => {
+export const Seats = ({
+  hallName,
+  places,
+  time,
+  tickets,
+  setTickets,
+  totalPrice,
+  setTotalPrice,
+}) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [tickets, setTickets] = useState([]);
-
-  //   const tickets = [];
 
   const handleChangeInput = e => {
     if (e.target.checked) {
@@ -18,23 +22,27 @@ export const Seats = ({ hallName, places, time }) => {
       tickets.push({
         row: e.target.attributes.row.value,
         column: e.target.attributes.column.value,
+        id: e.target.attributes.row.value + e.target.attributes.column.value,
       });
     } else {
       setTotalPrice(totalPrice - Number(e.target.value));
-      tickets.pop({
-        row: e.target.attributes.row.value,
-        column: e.target.attributes.column.value,
-      });
+      setTickets(
+        tickets.filter(
+          ticket =>
+            ticket.id !==
+            e.target.attributes.row.value + e.target.attributes.column.value,
+        ),
+      );
     }
     // console.log(e.target);
     // console.log(e.target.value);
   };
 
+  console.log(tickets);
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
-
-  console.log(tickets);
 
   return (
     <>
@@ -52,7 +60,7 @@ export const Seats = ({ hallName, places, time }) => {
         <br />
         <br />
         <ol className={hallName}>
-          {places.map((row, i) =>
+          {places?.map((row, i) =>
             row.map((seat, j) => (
               <>
                 <li key={j} className="checkbox-item">
