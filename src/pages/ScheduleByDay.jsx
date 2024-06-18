@@ -15,8 +15,8 @@ export const ScheduleByDay = ({
   totalPrice,
   setTotalPrice,
 }) => {
-  console.log('hallName', hallName);
-  console.log('places', places);
+  //   console.log('hallName', hallName);
+  //   console.log('places', places);
 
   return (
     <>
@@ -28,8 +28,11 @@ export const ScheduleByDay = ({
                 className="hall-name-button"
                 style={{ backgroundColor: hall.name }}
                 onClick={() => {
-                  console.log(schedules[index].seances[i].hall.places);
-                  setHallName(schedules[index].seances[i]?.hall.name);
+                  console.log(
+                    'places-array: ',
+                    schedules[index].seances[i].hall.places,
+                  );
+                  setHallName(schedules[index]?.seances[i]?.hall?.name);
                   setPlaces(schedules[index].seances[i]?.hall.places);
                   setTime(time);
                 }}
