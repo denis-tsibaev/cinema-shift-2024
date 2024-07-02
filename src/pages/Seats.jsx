@@ -1,20 +1,44 @@
 // import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 
-export const Seats = ({ hallName, places, time }) => {
+export const Seats = ({
+  hallName,
+  places,
+  time,
+  tickets,
+  setTickets,
+  totalPrice,
+  setTotalPrice,
+}) => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleChangeInput = e => {
     if (e.target.checked) {
       setTotalPrice(totalPrice + Number(e.target.value));
+      tickets.push({
+        row: e.target.attributes.row.value,
+        column: e.target.attributes.column.value,
+        id: e.target.attributes.row.value + e.target.attributes.column.value,
+      });
     } else {
       setTotalPrice(totalPrice - Number(e.target.value));
+      setTickets(
+        tickets.filter(
+          ticket =>
+            ticket.id !==
+            e.target.attributes.row.value + e.target.attributes.column.value,
+        ),
+      );
     }
+    // console.log(e.target);
+    // console.log(e.target.value);
   };
+
+  console.log(tickets);
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -32,12 +56,11 @@ export const Seats = ({ hallName, places, time }) => {
               : 'Синий зал'}
           , сеанс на: {time}
         </h2>
-        <p>Экран</p>
-        <hr />
+        <p className="screen">Экран</p>
         <br />
         <br />
         <ol className={hallName}>
-          {places.map((row, i) =>
+          {places?.map((row, i) =>
             row.map((seat, j) => (
               <>
                 <li key={j} className="checkbox-item">
@@ -48,7 +71,10 @@ export const Seats = ({ hallName, places, time }) => {
                     {seat.type !== 'BLOCKED' ? (
                       <input
                         type="checkbox"
+                        name="seat"
                         value={seat.price}
+                        row={i + 1}
+                        column={j + 1}
                         className="input-checkbox-seat"
                         onChange={handleChangeInput}
                       />
@@ -78,9 +104,14 @@ export const Seats = ({ hallName, places, time }) => {
           <br />
           <br />
           <br />
-          <Link to="/profile" style={{ color: 'white' }}>
-            <Button>Перейти</Button>
-          </Link>
+
+          <Button
+            style={{ marginRight: '5px' }}
+            onClick={() => navigate('/profile')}
+          >
+            Перейти
+          </Button>
+
           <Button onClick={toggleModal}>Отмена</Button>
         </Modal>
       )}

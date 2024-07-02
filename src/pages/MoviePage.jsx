@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { BASE_URL, getMovie } from '../service/ServiceApi';
 
 export const MoviePage = () => {
+  const navigate = useNavigate();
   const [movie, setMovie] = useState({});
   const { filmId } = useParams();
 
@@ -26,9 +27,12 @@ export const MoviePage = () => {
       <p>
         Кинопоиск: <b>{movie.userRatings?.kinopoisk}</b>
       </p>
-      <Link to={`/film/${filmId}/schedule`}>
-        <Button>Посмотреть расписание</Button>
-      </Link>
+      <Button
+        style={{ width: '250px' }}
+        onClick={() => navigate(`/film/${filmId}/schedule`)}
+      >
+        Посмотреть расписание
+      </Button>
     </div>
   );
 };
