@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
-import { sendPhoneNumberToGetCode, userSignin } from '../service/ServiceApi';
+import { sendPhoneNumberToGetCode, userSignin } from '../service/serviceApi';
 
 export const Profile = ({
   phone,

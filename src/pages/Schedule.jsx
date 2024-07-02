@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button } from '../components/Button';
-import { getSchedule } from '../service/ServiceApi';
+import { getSchedule } from '../service/serviceApi';
 import { ScheduleByDay } from './ScheduleByDay';
 
 export const Schedule = ({
