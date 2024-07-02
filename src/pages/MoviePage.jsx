@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '../components/Button';
-import { BASE_URL, getMovie } from '../service/ServiceApi';
+import { BASE_URL, getMovie } from '../service/serviceApi';
 
 export const MoviePage = () => {
   const [movie, setMovie] = useState({});
